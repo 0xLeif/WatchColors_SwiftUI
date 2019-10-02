@@ -13,8 +13,11 @@ struct ColorView: View {
     var levels: [Double] = stride(from: 0.1, to: 1, by: 0.1).reversed()
     
     var body: some View {
-        List(levels.identified(by: \.self)) { i in
-            self.color.opacity(i)
+        List(levels, id: \.self) { i in
+            NavigationLink(destination: self.color.opacity(i)) {
+                self.color.opacity(i)
+            }
+            
         }
     }
 }
@@ -23,7 +26,7 @@ struct ContentView : View {
     var colors: [Color] = [.red, .pink, .orange, .yellow, .green, .blue, .purple, .gray, .white]
     
     var body: some View {
-        List(colors.identified(by: \.self)) { color in
+        List(colors, id: \.self) { color in
             NavigationLink(destination: ColorView(color: color)) {
                 color
             }
